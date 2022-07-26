@@ -15,12 +15,11 @@ for file in os.listdir():
 
     print(f"{file}: {year}")
 
-    for item in os.listdir(): # Create folder named after the file year
-        if os.path.isdir(item):
-            try:
-                os.mkdir(year)
-            except FileExistsError:
-                pass
+    try:
+        os.mkdir(year)
+    except FileExistsError:
+        pass
+
     try:
         if file_ext == "jpg" or file_ext == "jpeg" or file_ext == "JPG" or file_ext == "png" or file_ext == "gif" or file_ext == "webp" or file_ext == "mkv" or file_ext == "mp4": # I'll find a more elegant solution later - why are there so many names for .jpg
             shutil.move(file, year)
