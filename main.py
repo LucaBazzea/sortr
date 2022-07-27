@@ -3,9 +3,6 @@ from datetime import datetime
 import shutil
 from PIL import Image
 from PIL.ExifTags import TAGS
-from PIL import UnidentifiedImageError
-
-os.chdir("C:/Users/Luca/Desktop/sort")
 
 def get_mtime(file):
     unix_time = os.path.getmtime(file) # Get timestamp
