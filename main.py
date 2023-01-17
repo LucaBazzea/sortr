@@ -62,6 +62,7 @@ for file in select_folder():
 
     if file_ext == "jpg" or file_ext == "jpeg" or file_ext == "JPG": # If file is not a .jpg then sorting will be done based on date modified
         year = get_exif(file)
+
     else:
         year = get_mtime(file)
 
@@ -69,13 +70,16 @@ for file in select_folder():
 
     try:
         os.mkdir(year)
+
     except FileExistsError:
         pass
+
     except FileNotFoundError:
         pass
 
     try:
         if file_ext == "jpg" or file_ext == "jpeg" or file_ext == "JPG" or file_ext == "png" or file_ext == "gif" or file_ext == "webp" or file_ext == "mkv" or file_ext == "mp4": # I'll find a more elegant solution later - why are there so many names for .jpg
             shutil.move(file, year)
+            
     except:
         print(f"\t\tError - Duplicate name: {file}")
