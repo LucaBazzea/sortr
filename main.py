@@ -48,7 +48,16 @@ def get_exif(file):
     return year
 
 
-for file in os.listdir():
+def select_folder():
+    root = tk.Tk()
+    root.withdraw()
+
+    folder_path = filedialog.askdirectory()
+
+    return folder_path
+
+
+for file in select_folder():
     file_ext = str(file).split(".")[-1] # Get file extension
 
     if file_ext == "jpg" or file_ext == "jpeg" or file_ext == "JPG": # If file is not a .jpg then sorting will be done based on date modified
