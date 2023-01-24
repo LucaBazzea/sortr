@@ -58,7 +58,6 @@ def get_exif(file):
 
 selected_folder = select_folder()
 os.chdir(selected_folder)
-print(os.getcwd())
 
 for file in os.listdir():
     file_ext = str(file).split(".")[-1] # Get file extension
