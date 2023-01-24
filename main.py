@@ -9,6 +9,15 @@ import tkinter as tk
 from tkinter import filedialog
 
 
+def select_folder():
+    root = tk.Tk()
+    root.withdraw()
+
+    folder_path = filedialog.askdirectory()
+
+    return folder_path
+
+
 def get_mtime(file):
     unix_time = os.path.getmtime(file) # Get timestamp
     date_time = datetime.fromtimestamp(unix_time) # Convert unix time to something human readable
@@ -47,17 +56,11 @@ def get_exif(file):
 
     return year
 
+selected_folder = select_folder()
+os.chdir(selected_folder)
+print(os.getcwd())
 
-def select_folder():
-    root = tk.Tk()
-    root.withdraw()
-
-    folder_path = filedialog.askdirectory()
-
-    return folder_path
-
-
-for file in select_folder():
+for file in os.listdir():
     file_ext = str(file).split(".")[-1] # Get file extension
 
     if file_ext == "jpg" or file_ext == "jpeg" or file_ext == "JPG": # If file is not a .jpg then sorting will be done based on date modified
@@ -69,7 +72,7 @@ for file in select_folder():
     print(f"\t\t{file}:\t{year}")
 
     try:
-        os.mkdir(year)
+        os.mkdir(selected_folder + "/" + year)
 
     except FileExistsError:
         pass
@@ -80,6 +83,6 @@ for file in select_folder():
     try:
         if file_ext == "jpg" or file_ext == "jpeg" or file_ext == "JPG" or file_ext == "png" or file_ext == "gif" or file_ext == "webp" or file_ext == "mkv" or file_ext == "mp4": # I'll find a more elegant solution later - why are there so many names for .jpg
             shutil.move(file, year)
-            
+
     except:
         print(f"\t\tError - Duplicate name: {file}")
