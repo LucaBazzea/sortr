@@ -13,7 +13,7 @@ def select_folder():
     root = tk.Tk()
     root.withdraw()
 
-    folder_path = filedialog.askdirectory()
+    folder_path = filedialog.askdirectory(initialdir='.', title='Select a folder', mustexist=True)
 
     return folder_path
 
@@ -55,6 +55,7 @@ def get_exif(file):
         year = get_mtime(file)
 
     return year
+
 
 selected_folder = select_folder()
 os.chdir(selected_folder)
